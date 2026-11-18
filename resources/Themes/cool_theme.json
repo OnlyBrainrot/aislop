@@ -1,0 +1,53 @@
+{
+    "blur": {
+        "blurEnabled": true,
+        "blurRadius": 1.0,
+        "blurSpeed": 0.30000001192092896
+    },
+    "colors": {
+        "backgroundColor": "212337FF",
+        "borderColor": "7081D033",
+        "buttonActivatedColor": "A48CF2FF",
+        "buttonActiveForeground": "FFFFFFFF",
+        "buttonBackgroundColor": "323449FF",
+        "buttonDisabledColor": "EBFAFAFF",
+        "buttonDisabledForeground": "888888FF",
+        "buttonForegroundColor": "FFFFFFFF",
+        "buttonHoveredColor": "7081D0FF",
+        "buttonHoveredForeground": "FFFFFFFF",
+        "checkboxBackgroundColor": "323449FF",
+        "checkboxCheckmarkColor": "A48CF2FF",
+        "checkboxForegroundColor": "FFFFFFFF",
+        "disabledColor": "999999FF",
+        "foregroundColor": "FFFFFFFF",
+        "frameBackground": "323449FF",
+        "searchedColor": "7081D0FF",
+        "titleBackgroundColor": "A48CF2FF",
+        "titleForegroundColor": "FFFFFFFF"
+    },
+    "details": {
+        "author": "GMDPLUTONIC",
+        "description": "A nice and cozy theme.",
+        "layout": 0,
+        "name": "Eldritch",
+        "renderer": 0,
+        "schema": 1,
+        "style": 2
+    },
+    "other": {
+        "borderSize": 4.0,
+        "font": "Poppins",
+        "fontSize": 18.0,
+        "framePadding": 8.0,
+        "frameRounding": 1.0,
+        "horizontalInnerSpacing": 8.0,
+        "horizontalSpacing": 12.0,
+        "indentSpacing": 25.0,
+        "uiScale": 0.95,
+        "verticalInnerSpacing": 6.0,
+        "verticalSpacing": 8.0,
+        "windowMargin": 4.0,
+        "windowPadding": 15.0,
+        "windowRounding": 2.5
+    }
+}
