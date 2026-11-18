@@ -31,6 +31,8 @@ jobs:
     name: Package builds
     runs-on: ubuntu-latest
     needs: ['build']
+    permissions:
+      contents: write
 
     steps:
       - name: Combine builds
@@ -42,3 +44,14 @@ jobs:
         with:
           name: Build Output
           path: ${{ steps.build.outputs.build-output }}
+
+      - name: Publish build as a release
+        if: github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="build-${{ github.run_number }}"
+          gh release create "$TAG" ${{ steps.build.outputs.build-output }}/*.geode \
+            --repo "${{ github.repository }}" --target "${{ github.sha }}" \
+            --title "Eclipse v1.9.4 for Geode v6.0.0-alpha.2 (Windows) - $TAG" \
+            --notes "Built from ${{ github.sha }} against Geode SDK v6.0.0-alpha.2." --prerelease
