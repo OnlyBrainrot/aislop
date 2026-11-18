@@ -66,9 +66,9 @@ namespace eclipse::ai {
 
         m_input->setCommonFilter(CommonFilter::Any);
         this->addEventListener(KeyboardInputEvent(KEY_Enter), [this](KeyboardInputData& event) {
-            if (event.action == KeyboardInputData::Action::Release && m_input->getInputNode()->m_selected) {
+            if (event.action == KeyboardInputData::Action::Release && m_input->isFocused()) {
                 this->submitMessage(m_input->getString());
-                m_input->defocus();
+                m_input->unfocus();
             }
         });
 

@@ -66,13 +66,16 @@ namespace eclipse::bot {
             return Err(std::move(res).unwrapErr());
 
         auto data = std::move(res).unwrap();
-        return file::writeBinarySafe(path, data);
+        auto writeRes = file::writeBinarySafe(path, data);
+        if (writeRes.isErr())
+            return Err(writeRes.unwrapErr().toString());
+        return Ok();
     }
 
     Result<> Bot::load(asp::fs::PathView path) {
         auto res = file::readBinary(path);
         if (res.isErr())
-            return Err(std::move(res).unwrapErr());
+            return Err(res.unwrapErr().toString());
 
         auto fileData = std::move(res).unwrap();
         return load(fileData);

@@ -4,7 +4,7 @@
 #include <modules/gui/components/input-float.hpp>
 
 namespace eclipse::gui::cocos {
-    class InputFloatComponentNode : public BaseComponentNode<InputFloatComponentNode, cocos2d::CCMenu, InputFloatComponent, float>, public TextInputDelegate {
+    class InputFloatComponentNode : public BaseComponentNode<InputFloatComponentNode, cocos2d::CCMenu, InputFloatComponent, float> {
     protected:
         TranslatedLabel* m_label = nullptr;
         CCMenuItemSpriteExtra* m_infoButton = nullptr;
@@ -39,8 +39,11 @@ namespace eclipse::gui::cocos {
 
             m_textInput = geode::TextInput::create(120, m_component->getTitle().c_str(), "font_default.fnt"_spr);
             m_textInput->setAnchorPoint({ 0.5f, 0.5f });
-            m_textInput->getInputNode()->setAllowedChars(".0123456789");
-            m_textInput->setDelegate(this);
+            m_textInput->setCommonFilter(geode::CommonFilter::UFloat);
+            m_textInput->setCallback([this](std::string const& text) { this->textChanged(text); });
+            m_textInput->setFocusCallback([this](geode::TextInput::FocusState state) {
+                if (state == geode::TextInput::FocusState::Unfocused) this->textInputClosed();
+            });
             m_textInput->setString(fmt::to_string(m_component->getValue()));
             m_textInput->setScale(0.85f);
             this->addChildAtPosition(m_textInput, geode::Anchor::Right, { -70.f, 0.f });
@@ -48,8 +51,8 @@ namespace eclipse::gui::cocos {
             return true;
         }
 
-        void textChanged(CCTextInputNode* input) override {
-            auto valueOpt = geode::utils::numFromString<float>(input->getString());
+        void textChanged(std::string const& text) {
+            auto valueOpt = geode::utils::numFromString<float>(text);
             if (!valueOpt) return;
 
             float value = std::clamp(*valueOpt, m_component->getMin(), m_component->getMax());
@@ -58,7 +61,7 @@ namespace eclipse::gui::cocos {
             m_component->triggerCallback(value);
         }
 
-        void textInputClosed(CCTextInputNode* input) override {
+        void textInputClosed() {
             m_textInput->setString(fmt::to_string(m_component->getValue()));
         }
     };

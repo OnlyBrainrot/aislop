@@ -59,7 +59,7 @@ namespace eclipse::hacks::Bot {
                 if (createRes.isErr()) {
                     return Popup::create(
                         i18n::get_("common.error"),
-                        createRes.unwrapErr()
+                        createRes.unwrapErr().toString()
                     );
                 }
 
@@ -89,7 +89,7 @@ namespace eclipse::hacks::Bot {
         if (createRes.isErr()) {
             return Popup::create(
                 i18n::get_("common.error"),
-                createRes.unwrapErr()
+                createRes.unwrapErr().toString()
             );
         }
 
@@ -222,7 +222,7 @@ namespace eclipse::hacks::Bot {
         if (createRes.isErr()) {
             return Popup::create(
                 i18n::get_("common.error"),
-                createRes.unwrapErr()
+                createRes.unwrapErr().toString()
             );
         }
 
