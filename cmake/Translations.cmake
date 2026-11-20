@@ -1,19 +1,6 @@
-include(FetchContent)
-
-if (DEFINED ENV{ECLIPSE_TRANSLATIONS_REPO_PATH})
-    set(TRANSLATIONS_PATH $ENV{ECLIPSE_TRANSLATIONS_REPO_PATH})
-else()
-    FetchContent_Declare(
-        eclipse_translations
-        GIT_REPOSITORY https://git.eclipse.menu/EclipseMenu/translations.git
-        GIT_TAG main
-        GIT_SHALLOW TRUE
-        UPDATE_DISCONNECTED FALSE
-    )
-
-    FetchContent_MakeAvailable(eclipse_translations)
-
-    set(TRANSLATIONS_PATH ${eclipse_translations_SOURCE_DIR})
-endif()
-
-setup_translations(${PROJECT_NAME})
+# The upstream translations repo (git.eclipse.menu) is not reliably reachable,
+# so the language files are bundled in resources/translations and picked up by
+# the "resources/translations/*.json" glob in mod.json.
+# The timestamp marks when this snapshot was taken (unix seconds); newer
+# translations are still downloaded at runtime by the i18n module.
+target_compile_definitions(${PROJECT_NAME} PRIVATE ECLIPSE_TRANSLATION_TIMESTAMP=1794982920)
