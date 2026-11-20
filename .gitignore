@@ -65,7 +65,7 @@ build-android.sh
 bindings/
 website/
 bindingsbefore/
-resources/translations/*
+# resources/translations/* (bundled in this fork)
 build/
 bindings/
 bindingsbefore/
