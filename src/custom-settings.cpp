@@ -1,3 +1,4 @@
+#include <Geode/ui/Button.hpp>
 #include <Geode/binding/ButtonSprite.hpp>
 #include <Geode/loader/Mod.hpp>
 #include <Geode/loader/SettingV3.hpp>
@@ -42,7 +43,7 @@ public:
 class CustomButtonNode : public SettingNodeV3 {
 protected:
     ButtonSprite* m_buttonSprite{};
-    CCMenuItemSpriteExtra* m_button{};
+    geode::Button* m_button{};
 
     bool init(const std::shared_ptr<CustomButton>& setting, float width) {
         if (!SettingNodeV3::init(setting, width))
@@ -50,8 +51,8 @@ protected:
 
         m_buttonSprite = ButtonSprite::create(this->getSetting()->getButtonCaption().c_str(), "goldFont.fnt", "GJ_button_01.png", .8f);
         m_buttonSprite->setScale(.5f);
-        m_button = CCMenuItemSpriteExtra::create(
-            m_buttonSprite, this, menu_selector(CustomButtonNode::onButton)
+        m_button = geode::Button::createWithNode(
+            m_buttonSprite, [this](geode::Button*) { this->onButton(nullptr); }
         );
         this->getButtonMenu()->addChildAtPosition(m_button, Anchor::Center);
         this->getButtonMenu()->setContentWidth(60);

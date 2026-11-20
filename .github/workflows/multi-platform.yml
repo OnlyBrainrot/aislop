@@ -1,4 +1,4 @@
-name: Build Eclipse (Geode v6.0.0-alpha.2, Windows)
+name: Build Eclipse (Geode v6.0.0-alpha.3, Windows)
 
 on:
   workflow_dispatch:
@@ -19,8 +19,8 @@ jobs:
         uses: geode-sdk/build-geode-mod@main
         with:
           bindings: geode-sdk/bindings
-          # bindings main as of the v6.0.0-alpha.2 release (2026-11-15)
-          bindings-ref: 7a670e953f63de379722215b8d2fa4d95e1e3f75
+          # bindings main as of the v6.0.0-alpha.3 release (2026-11-19)
+          bindings-ref: c97a5c6e265eb98385fc7aa22a593d250bc8c142
           sdk: given
           cli: latest
           combine: true
@@ -53,5 +53,5 @@ jobs:
           TAG="build-${{ github.run_number }}"
           gh release create "$TAG" ${{ steps.build.outputs.build-output }}/*.geode \
             --repo "${{ github.repository }}" --target "${{ github.sha }}" \
-            --title "Eclipse v1.9.4 for Geode v6.0.0-alpha.2 (Windows) - $TAG" \
-            --notes "Built from ${{ github.sha }} against Geode SDK v6.0.0-alpha.2." --prerelease
+            --title "Eclipse v1.9.4 for Geode v6.0.0-alpha.3 (Windows) - $TAG" \
+            --notes "Built from ${{ github.sha }} against Geode SDK v6.0.0-alpha.3." --prerelease
